@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-surface: #0a0a0a;
+  --color-accent: #3b82f6;
+  --color-muted: #737373;
+  --color-border: rgba(255, 255, 255, 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-[#0a0a0a] text-white antialiased;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    min-height: 100dvh;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    @apply bg-white/20 text-white;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-white/40;
+  }
+}
+
+@layer utilities {
+  .container-main {
+    @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:max-w-6xl lg:px-8;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .section-pad {
+    @apply py-16 sm:py-20 md:py-24;
+  }
+
+  .glass {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-md;
+  }
+
+  .glass-strong {
+    @apply rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-lg;
+  }
+
+  .project-thumb {
+    @apply relative overflow-hidden rounded-xl border border-white/[0.06];
+  }
+
+  .project-thumb img {
+    @apply h-full w-full object-cover object-top transition-transform duration-500 ease-out;
+  }
+
+  .group\/card:hover .project-thumb img {
+    @apply scale-[1.02];
+  }
+
+  .btn-link {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-sm font-medium text-neutral-300 transition-colors hover:border-white/20 hover:bg-white/5 hover:text-white;
+  }
+
+  .btn-link-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-black transition-colors hover:bg-neutral-200;
+  }
+
+  .input-field {
+    @apply min-h-[44px] w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base text-white placeholder-neutral-600 outline-none transition-all focus:border-white/25 focus:ring-2 focus:ring-white/10 sm:text-sm;
+  }
+
+  .scroll-hint {
+    @apply overflow-x-auto overscroll-x-contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-email {
+    font-size: 0.8125rem;
+  }
+}
