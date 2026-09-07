@@ -120,7 +120,7 @@ export interface Project {
   techStack: string[];
   github: string;
   liveDemo?: string;
-  thumbnail?: string;
+  thumbnail: string;
   stars: number;
   metrics?: { label: string; value: string }[];
   gradient: string;
@@ -128,6 +128,9 @@ export interface Project {
   featured: boolean;
   spotlight?: boolean;
 }
+
+const thumb = (url: string) =>
+  `https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=800`;
 
 export const projects: Project[] = [
   {
@@ -146,6 +149,7 @@ export const projects: Project[] = [
     techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/amayukf/gifty-tech",
     liveDemo: "https://gifty-tech.vercel.app",
+    thumbnail: thumb("https://gifty-tech.vercel.app"),
     stars: 5,
     metrics: [
       { label: "Stars", value: "5" },
@@ -174,6 +178,7 @@ export const projects: Project[] = [
     techStack: ["React 19", "Django REST", "Python", "JWT", "Axios"],
     github: "https://github.com/amayukf/2blood-donation-management-system",
     liveDemo: "https://blood-donation-frontend-rxfc.onrender.com/",
+    thumbnail: thumb("https://blood-donation-frontend-rxfc.onrender.com/"),
     stars: 0,
     metrics: [
       { label: "Architecture", value: "Full Stack" },
@@ -201,6 +206,7 @@ export const projects: Project[] = [
     techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Zustand"],
     github: "https://github.com/amayukf/eduhub",
     liveDemo: "https://eduhub-mocha.vercel.app",
+    thumbnail: thumb("https://eduhub-mocha.vercel.app"),
     stars: 0,
     metrics: [
       { label: "Portals", value: "2" },
@@ -228,6 +234,7 @@ export const projects: Project[] = [
     techStack: ["Next.js 14", "TypeScript", "Sandpack", "Monaco Editor"],
     github: "https://github.com/amayukf/NeuroUI",
     liveDemo: "https://neuroui.onrender.com",
+    thumbnail: thumb("https://neuroui.onrender.com"),
     stars: 0,
     metrics: [
       { label: "Framework", value: "Next.js" },
@@ -254,6 +261,7 @@ export const projects: Project[] = [
     impact: "Python data processing pipeline for financial performance tracking",
     techStack: ["Python", "Pandas", "NumPy", "Matplotlib", "FastAPI"],
     github: "https://github.com/amayukf/trading-performance",
+    thumbnail: thumb("https://github.com/amayukf/trading-performance"),
     stars: 0,
     metrics: [
       { label: "Pipeline", value: "Pandas" },
@@ -280,6 +288,7 @@ export const projects: Project[] = [
     techStack: ["Python", "JavaScript", "HTML5", "CSS3"],
     github: "https://github.com/amayukf/tindercheckweb",
     liveDemo: "https://tindercheck.netlify.app",
+    thumbnail: thumb("https://tindercheck.netlify.app"),
     stars: 2,
     metrics: [
       { label: "Backend", value: "Python" },
