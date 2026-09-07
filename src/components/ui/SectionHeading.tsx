@@ -4,9 +4,10 @@ interface SectionHeadingProps {
   eyebrow: string
   title: string
   description?: string
+  id?: string
 }
 
-export function SectionHeading({ eyebrow, title, description }: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, title, description, id }: SectionHeadingProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -16,7 +17,7 @@ export function SectionHeading({ eyebrow, title, description }: SectionHeadingPr
       className="mb-10 md:mb-12"
     >
       <p className="mb-2 text-sm text-neutral-500">{eyebrow}</p>
-      <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
+      <h2 id={id} className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
         {title}
       </h2>
       {description && (

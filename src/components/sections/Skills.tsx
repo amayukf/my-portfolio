@@ -9,7 +9,6 @@ const categories = [
   { key: 'databases' as const, label: 'Databases' },
   { key: 'tools' as const, label: 'Tools' },
   { key: 'cloud' as const, label: 'Cloud & Deployment' },
-  { key: 'versionControl' as const, label: 'Version Control' },
 ]
 
 export function Skills() {
@@ -19,13 +18,14 @@ export function Skills() {
         <SectionHeading
           eyebrow="Skills"
           title="Technologies I work with"
-          description="A full-stack toolkit honed across 25+ deployed projects."
+          description="A full-stack toolkit honed across 32+ deployed projects."
+          id="skills-heading"
         />
 
         <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {categories.map((cat, i) => (
             <GlassCard key={cat.key} delay={i * 0.04}>
-              <h3 id={i === 0 ? 'skills-heading' : undefined} className="text-base font-semibold text-white sm:text-lg">
+              <h3 className="text-base font-semibold text-white sm:text-lg">
                 {cat.label}
               </h3>
               <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">

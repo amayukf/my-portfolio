@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   ShoppingBag,
   Star,
+  TrendingUp,
   type LucideIcon,
 } from 'lucide-react'
 import { projects } from '../../data/portfolio'
@@ -23,15 +24,21 @@ const iconMap: Record<string, LucideIcon> = {
   Search,
   ShieldCheck,
   Heart,
+  TrendingUp,
 }
 
-function ProjectThumbnail({ src, alt, title }: { src: string; alt: string; title: string }) {
+function ProjectThumbnail({ src, alt, title }: { src?: string; alt: string; title: string }) {
   const [error, setError] = useState(false)
 
-  if (error) {
+  if (!src || error) {
     return (
-      <div className="flex h-full min-h-[160px] items-center justify-center bg-neutral-900 sm:min-h-[180px]">
-        <span className="px-4 text-center text-sm font-medium text-neutral-500">{title}</span>
+      <div className="flex h-full min-h-[160px] items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-900 to-black p-4 text-center sm:min-h-[180px]">
+        <div className="space-y-1">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-400">
+            <Code2 size={20} />
+          </div>
+          <span className="block text-sm font-semibold text-neutral-300">{title}</span>
+        </div>
       </div>
     )
   }
@@ -73,7 +80,7 @@ function SpotlightProject({ project }: { project: (typeof projects)[0] }) {
             </span>
           </div>
 
-          <h3 id="projects-heading" className="mt-4 text-xl font-semibold text-white sm:text-2xl md:text-3xl">
+          <h3 className="mt-4 text-xl font-semibold text-white sm:text-2xl md:text-3xl">
             {project.title}
           </h3>
           <p className="mt-2 text-sm text-neutral-400 sm:mt-3 sm:text-base">{project.description}</p>
@@ -216,6 +223,7 @@ export function Projects() {
           eyebrow="Featured Work"
           title="Real products. Real deployments."
           description="Every project below is live, deployed, and solving an actual problem — not a tutorial clone."
+          id="projects-heading"
         />
 
         {spotlight && (

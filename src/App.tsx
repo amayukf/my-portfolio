@@ -7,10 +7,12 @@ import { Achievements } from './components/sections/Achievements'
 import { Skills } from './components/sections/Skills'
 import { GitHubAnalytics } from './components/sections/GitHubAnalytics'
 import { Contact } from './components/sections/Contact'
+import { MouseGlow } from './components/ui/MouseGlow'
 
 function App() {
   return (
     <>
+      <MouseGlow />
       <Navbar />
       <main>
         <Hero />

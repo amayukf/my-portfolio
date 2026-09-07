@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amayukf.vercel.app/sitemap.xml
+Sitemap: https://www.amayukf.app/sitemap.xml

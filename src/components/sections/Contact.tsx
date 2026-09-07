@@ -8,17 +8,83 @@ import { GlassCard } from '../ui/GlassCard'
 import { SectionHeading } from '../ui/SectionHeading'
 import { GitHubIcon, LinkedInIcon } from '../ui/SocialIcons'
 
+// Optional custom webhook or Telegram Bot integration for instant SMS/Mobile notifications
+const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || ''
+const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID || ''
+const SMS_WEBHOOK_URL = import.meta.env.VITE_SMS_WEBHOOK_URL || ''
+
 export function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
+    setError('')
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const name = formData.get('name') as string
+    const email = formData.get('email') as string
+    const subject = formData.get('subject') as string
+    const message = formData.get('message') as string
+
+    const formattedMessage = `📩 New Portfolio Lead!\n👤 Name: ${name}\n✉️ Email: ${email}\n📌 Subject: ${subject}\n💬 Message: ${message}`
+
+    let success = false
+
+    try {
+      // 1. Submit to Formspree for Email delivery
+      const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xjyvaonl'
+      const res = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      })
+
+      if (res.ok) {
+        success = true
+      }
+
+      // 2. Dispatch instant Telegram notification (acts as instant mobile push/SMS) if configured
+      if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: formattedMessage,
+          }),
+        }).catch(() => {})
+      }
+
+      // 3. Dispatch to custom SMS Webhook (Twilio / Make / Zapier) if configured
+      if (SMS_WEBHOOK_URL) {
+        await fetch(SMS_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message, formattedMessage }),
+        }).catch(() => {})
+      }
+
+      if (success) {
+        setSubmitted(true)
+        form.reset()
+      } else {
+        // Fallback to mailto if services fail
+        const mailtoUrl = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`
+        window.location.href = mailtoUrl
+        setSubmitted(true)
+      }
+    } catch {
+      // Fallback to mailto on network error
+      const mailtoUrl = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`
+      window.location.href = mailtoUrl
       setSubmitted(true)
-    }, 800)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -28,11 +94,12 @@ export function Contact() {
           eyebrow="Contact"
           title="Let's talk"
           description="Internship, freelance, or collaboration — I reply within 24 hours."
+          id="contact-heading"
         />
 
         <div className="grid gap-6 lg:grid-cols-5 lg:gap-8">
           <GlassCard className="lg:col-span-2" delay={0}>
-            <h3 id="contact-heading" className="text-lg font-semibold text-white sm:text-xl">
+            <h3 className="text-lg font-semibold text-white sm:text-xl">
               Reach me directly
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-neutral-500 sm:mt-3">
@@ -98,10 +165,17 @@ export function Contact() {
                   >
                     <CheckCircle2 className="text-emerald-400" size={36} />
                   </motion.div>
-                  <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-2xl">Message received!</h3>
+                  <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-2xl">Message sent!</h3>
                   <p className="mt-2 max-w-sm text-sm text-neutral-500">
-                    Thanks for reaching out. I&apos;ll get back to you within 24 hours.
+                    Thanks for reaching out. I&apos;ll get instant notification on my phone and get back to you within 24 hours.
                   </p>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="mt-6 text-sm text-neutral-500 transition-colors hover:text-white"
+                  >
+                    Send another message
+                  </button>
                 </motion.div>
               ) : (
                 <motion.form
@@ -144,6 +218,9 @@ export function Contact() {
                       placeholder="Tell me about the role or project..."
                     />
                   </div>
+                  {error && (
+                    <p className="text-sm text-red-400">{error}</p>
+                  )}
                   <Button type="submit" variant="primary" className="w-full sm:w-auto" disabled={loading}>
                     {loading ? (
                       <span className="flex items-center gap-2">

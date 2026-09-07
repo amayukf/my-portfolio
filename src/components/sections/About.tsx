@@ -6,13 +6,12 @@ export function About() {
   return (
     <section id="about" className="section-pad border-t border-white/[0.04]" aria-labelledby="about-heading">
       <div className="container-main max-w-3xl">
-        <SectionHeading eyebrow="About" title="A bit about me" />
+        <SectionHeading eyebrow="About" title="A bit about me" id="about-heading" />
 
         <GlassCard hover={false} delay={0}>
           <div className="space-y-4">
             {about.story.map((paragraph) => (
               <p
-                id={paragraph === about.story[0] ? 'about-heading' : undefined}
                 key={paragraph.slice(0, 40)}
                 className="text-pretty text-[15px] leading-relaxed text-neutral-400 sm:text-base"
               >

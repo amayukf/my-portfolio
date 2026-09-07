@@ -29,6 +29,7 @@ export function Achievements() {
           eyebrow="Achievements & Highlights"
           title="Numbers that back it up"
           description="Proof of consistent building, deploying, and learning."
+          id="achievements-heading"
         />
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
@@ -39,10 +40,7 @@ export function Achievements() {
                 <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] sm:h-11 sm:w-11">
                   <Icon className="text-neutral-400" size={20} />
                 </div>
-                <p
-                  id={i === 0 ? 'achievements-heading' : undefined}
-                  className="mt-3 text-2xl font-semibold tabular-nums text-white sm:mt-4 sm:text-3xl"
-                >
+                <p className="mt-3 text-2xl font-semibold tabular-nums text-white sm:mt-4 sm:text-3xl">
                   <AnimatedCounter value={item.value} />
                   {item.suffix}
                 </p>
@@ -64,7 +62,7 @@ export function Achievements() {
             },
             {
               title: 'Consistent Shipper',
-              desc: 'Active contributions with 15+ live production deployments',
+              desc: 'Active contributions with 20+ live production deployments',
             },
           ].map((highlight, i) => (
             <GlassCard key={highlight.title} delay={0.15 + i * 0.04} className="border-l-2 border-l-white/20">
