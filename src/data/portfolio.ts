@@ -1,6 +1,6 @@
 export const profile = {
   name: "Amayu Kaba",
-  headline: "Full-stack & mobile dev building AI tools",
+  headline: "Full-Stack & Mobile Developer building AI tools",
   tagline: "Information Technology student",
   bio: "I build web & mobile apps end to end — React & Flutter frontends, Django/Python backends, deployed and live. Most of what I know came from shipping projects, not copying tutorials.",
   avatar: "https://avatars.githubusercontent.com/u/138348766?v=4",
@@ -12,10 +12,9 @@ export const profile = {
   available: true,
   resumeUrl: "/resume.html",
   typingRoles: [
-    "Full Stack Developer",
-    "Flutter & Mobile Developer",
-    "Information Technology Student",
+    "Full-Stack & Mobile Developer",
     "React & TypeScript Developer",
+    "Flutter & Mobile App Developer",
     "Python & FastAPI Developer",
     "AI Tools Builder",
   ],
@@ -25,7 +24,7 @@ export const about = {
   story: [
     "I'm an Information Technology student who got into development by building things I actually needed — exam checkers, mobile apps, LMS tools, donation platforms, and AI-powered utilities.",
     "I work mostly with React, TypeScript, Next.js, Flutter, Dart, Python, Django, and FastAPI. If it's on my GitHub, I built it, deployed it, and pushed updates myself.",
-    "Looking for an internship or junior role where I can write code on a real team.",
+    "Looking for a software engineering internship or junior full-stack/mobile role where I can write code on a real team.",
   ],
   goals: [
     "Software engineering internship (remote or on-site)",
@@ -36,8 +35,8 @@ export const about = {
     "Full-stack & mobile — React, Flutter, Python APIs to deployment",
     "20+ apps live on Vercel, Netlify & Render",
     "Cross-platform mobile apps with Flutter & Dart",
-    "Comfortable owning a project solo",
-    "Writes clean, readable code",
+    "Comfortable owning a project solo from spec to deploy",
+    "Writes clean, maintainable, readable code",
   ],
 };
 
@@ -48,6 +47,24 @@ export const achievements = [
   { label: "Technologies Used", value: 20, suffix: "+", icon: "Layers" },
   { label: "Hackathon Projects", value: 1, suffix: "", icon: "Trophy" },
   { label: "Years Building", value: 3, suffix: "+", icon: "Calendar" },
+];
+
+export const highlights = [
+  {
+    title: "Woliso Blood Management",
+    desc: "Full-stack Django REST + React platform managing emergency donor dispatch and hospital scheduling.",
+    tag: "Production Healthcare App",
+  },
+  {
+    title: "GiftyTech Commercial Platform",
+    desc: "Production tech store deployment with 95+ Lighthouse score serving active commercial customers.",
+    tag: "95+ Lighthouse SEO",
+  },
+  {
+    title: "32+ Open Source Projects",
+    desc: "Proven track record of building and deploying web, mobile, and Python tools independently.",
+    tag: "Active Contributor",
+  },
 ];
 
 export const skills = {
@@ -112,9 +129,6 @@ export interface Project {
   spotlight?: boolean;
 }
 
-const thumb = (url: string) =>
-  `https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=800`;
-
 export const projects: Project[] = [
   {
     id: "gifty-tech",
@@ -132,7 +146,6 @@ export const projects: Project[] = [
     techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/amayukf/gifty-tech",
     liveDemo: "https://gifty-tech.vercel.app",
-    thumbnail: thumb("https://gifty-tech.vercel.app"),
     stars: 5,
     metrics: [
       { label: "Stars", value: "5" },
@@ -161,7 +174,6 @@ export const projects: Project[] = [
     techStack: ["React 19", "Django REST", "Python", "JWT", "Axios"],
     github: "https://github.com/amayukf/2blood-donation-management-system",
     liveDemo: "https://blood-donation-frontend-rxfc.onrender.com/",
-    thumbnail: thumb("https://blood-donation-frontend-rxfc.onrender.com/"),
     stars: 0,
     metrics: [
       { label: "Architecture", value: "Full Stack" },
@@ -189,7 +201,6 @@ export const projects: Project[] = [
     techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Zustand"],
     github: "https://github.com/amayukf/eduhub",
     liveDemo: "https://eduhub-mocha.vercel.app",
-    thumbnail: thumb("https://eduhub-mocha.vercel.app"),
     stars: 0,
     metrics: [
       { label: "Portals", value: "2" },
@@ -217,7 +228,6 @@ export const projects: Project[] = [
     techStack: ["Next.js 14", "TypeScript", "Sandpack", "Monaco Editor"],
     github: "https://github.com/amayukf/NeuroUI",
     liveDemo: "https://neuroui.onrender.com",
-    thumbnail: thumb("https://neuroui.onrender.com"),
     stars: 0,
     metrics: [
       { label: "Framework", value: "Next.js" },
@@ -255,12 +265,12 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "tindercheck",
-    title: "TinderCheck Verification Suite",
+    id: "identity-check",
+    title: "IdentityCheck Verification Suite",
     description:
-      "Distributed Verification Platform — Python backend microservice with multi-cloud web client.",
+      "Python-based identity and profile validation microservice connecting API services with web clients.",
     problem:
-      "Identity validation workflows required seamless coordination between a Python processing backend and high-speed web interfaces.",
+      "Identity validation workflows required seamless coordination between a Python processing backend microservice and web interfaces.",
     features: [
       "Python microservice backend API integration",
       "Decoupled multi-repository full-stack architecture",
@@ -270,7 +280,6 @@ export const projects: Project[] = [
     techStack: ["Python", "JavaScript", "HTML5", "CSS3"],
     github: "https://github.com/amayukf/tindercheckweb",
     liveDemo: "https://tindercheck.netlify.app",
-    thumbnail: thumb("https://tindercheck.netlify.app"),
     stars: 2,
     metrics: [
       { label: "Backend", value: "Python" },

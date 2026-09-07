@@ -167,7 +167,7 @@ export function Contact() {
                   </motion.div>
                   <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-2xl">Message sent!</h3>
                   <p className="mt-2 max-w-sm text-sm text-neutral-500">
-                    Thanks for reaching out. I&apos;ll get instant notification on my phone and get back to you within 24 hours.
+                    Thanks for reaching out! I&apos;ll receive your message directly in my email inbox and reply within 24 hours.
                   </p>
                   <button
                     type="button"
